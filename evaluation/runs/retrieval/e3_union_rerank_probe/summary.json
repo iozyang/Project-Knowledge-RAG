@@ -1,0 +1,7 @@
+{
+  "experiment": "E3-Raw-Union-Rerank-Probe",
+  "question_count": 3,
+  "complete_count": 1,
+  "still_missing_count": 2,
+  "average_union_size": 34.0
+}

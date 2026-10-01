@@ -1,0 +1,13 @@
+{
+  "experiment": "E1",
+  "chunk_strategy": "recursive_character",
+  "chunk_size": 500,
+  "chunk_overlap": 100,
+  "retriever": "dense",
+  "embedding_model": "qwen3.7-text-embedding",
+  "embedding_dimensions": 1024,
+  "similarity": "cosine",
+  "top_k": 5,
+  "corpus_version": "P1-10MD-v1",
+  "benchmark_version": "v1"
+}

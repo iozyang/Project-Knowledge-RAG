@@ -1,0 +1,19 @@
+{
+  "experiment": "E3-Reranker-Error-Analysis",
+  "question_count": 45,
+  "gold_evidence_count": 73,
+  "question_categories": {
+    "complete": 38,
+    "candidate_miss": 5,
+    "reranker_miss": 2,
+    "mixed": 0
+  },
+  "evidence_analysis": {
+    "final_found": 62,
+    "candidate_missed": 8,
+    "reranker_missed": 3,
+    "final_found_rate": 0.8493150684931506,
+    "candidate_miss_rate": 0.1095890410958904,
+    "reranker_miss_rate": 0.0410958904109589
+  }
+}

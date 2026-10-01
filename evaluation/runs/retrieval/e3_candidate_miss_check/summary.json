@@ -1,0 +1,10 @@
+{
+  "experiment": "E3-Candidate-Miss-Check",
+  "question_count": 5,
+  "missed_evidence_count": 8,
+  "reason_count": {
+    "retrieval_miss": 4,
+    "fusion_miss": 4,
+    "unexpected": 0
+  }
+}

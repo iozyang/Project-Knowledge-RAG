@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Project RAG Demo</title>
+  <style>
+    :root { color-scheme: light dark; --bg:#f6f7f9; --panel:#fff; --text:#17191d; --muted:#6e737c; --line:rgba(20,24,30,.10); --chip:rgba(20,24,30,.055); --accent:#111827; --accentText:#fff; }
+    @media (prefers-color-scheme: dark) { :root { --bg:#0f1115; --panel:#181b21; --text:#f0f2f5; --muted:#9ba1aa; --line:rgba(255,255,255,.10); --chip:rgba(255,255,255,.07); --accent:#f4f5f7; --accentText:#111318; } }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; font-family:Inter,"SF Pro Display","PingFang SC","Microsoft YaHei",system-ui,sans-serif; background:var(--bg); color:var(--text); }
+    .shell { width:min(1040px,calc(100% - 32px)); margin:0 auto; padding:56px 0 80px; }
+    .eyebrow { font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
+    h1 { margin:0 0 10px; font-size:clamp(34px,5vw,54px); letter-spacing:-.045em; line-height:1.02; }
+    .subtitle { margin:0; color:var(--muted); line-height:1.7; max-width:780px; }
+    .pipeline { display:flex; flex-wrap:wrap; gap:8px; margin:18px 0 28px; }
+    .chip { font-size:12px; padding:7px 10px; border-radius:999px; background:var(--chip); border:1px solid var(--line); color:var(--muted); }
+    .panel { background:var(--panel); border:1px solid var(--line); border-radius:22px; overflow:hidden; }
+    .ask { padding:18px; }
+    textarea { width:100%; min-height:110px; resize:vertical; border:0; outline:0; background:transparent; color:var(--text); font:inherit; font-size:17px; line-height:1.65; padding:6px 4px 16px; }
+    .footer { display:flex; justify-content:space-between; align-items:center; gap:12px; padding-top:14px; border-top:1px solid var(--line); }
+    .examples { display:flex; flex-wrap:wrap; gap:8px; }
+    button { border:0; cursor:pointer; font:inherit; }
+    .ghost { color:var(--muted); background:var(--chip); border:1px solid var(--line); border-radius:999px; padding:7px 10px; font-size:12px; }
+    .primary { padding:10px 18px; border-radius:999px; background:var(--accent); color:var(--accentText); font-weight:650; min-width:92px; }
+    .primary:disabled { opacity:.5; cursor:wait; }
+    .status { min-height:20px; margin-top:12px; color:var(--muted); font-size:13px; }
+    .error { color:#c43b3b; }
+    #result { display:none; margin-top:20px; }
+    .section { padding:22px; }
+    .section + .section { border-top:1px solid var(--line); }
+    .section-title { font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
+    .answer { font-size:17px; line-height:1.85; white-space:pre-wrap; }
+    .trace { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; }
+    .metric { padding:13px 14px; border-radius:14px; background:var(--chip); border:1px solid var(--line); }
+    .metric-label { font-size:11px; color:var(--muted); margin-bottom:6px; }
+    .metric-value { font-size:14px; font-variant-numeric:tabular-nums; }
+    .sources { display:grid; gap:10px; }
+    details { background:var(--chip); border:1px solid var(--line); border-radius:15px; overflow:hidden; }
+    summary { cursor:pointer; padding:14px 15px; list-style:none; }
+    summary::-webkit-details-marker { display:none; }
+    .source-top { display:flex; justify-content:space-between; gap:16px; align-items:baseline; }
+    .source-name { font-size:14px; font-weight:650; overflow-wrap:anywhere; }
+    .score { flex:none; font-size:12px; color:var(--muted); font-variant-numeric:tabular-nums; }
+    .heading { color:var(--muted); margin-top:5px; font-size:12px; line-height:1.5; }
+    .content { border-top:1px solid var(--line); padding:14px 15px 16px; color:var(--muted); font-size:13px; line-height:1.7; white-space:pre-wrap; max-height:260px; overflow:auto; }
+    @media(max-width:760px){ .shell{padding-top:34px}.trace{grid-template-columns:1fr 1fr}.examples{max-width:70%} }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="eyebrow">Project Knowledge RAG</div>
+    <h1>Ask the project.</h1>
+    <p class="subtitle">冻结 Retrieval + Generation 的单轮 Web Demo。当前不包含 Query Rewrite 与多轮历史。</p>
+    <div class="pipeline">
+      <span class="chip">Heading-aware 500/100</span>
+      <span class="chip">BM25 Top20</span>
+      <span class="chip">Dense Top20</span>
+      <span class="chip">RRF Top20</span>
+      <span class="chip">Rerank Top5</span>
+      <span class="chip">qwen3.8-flash</span>
+    </div>
+
+    <section class="panel ask">
+      <textarea id="question" placeholder="例如：这个项目的数据从 PySpark 到前端经过了哪些环节？"></textarea>
+      <div class="footer">
+        <div class="examples">
+          <button class="ghost" data-q="这个项目是什么">项目是什么</button>
+          <button class="ghost" data-q="推荐部分怎么做的">推荐部分</button>
+          <button class="ghost" data-q="有没有登录页面">登录页面</button>
+        </div>
+        <button id="askBtn" class="primary">Ask</button>
+      </div>
+      <div id="status" class="status"></div>
+    </section>
+
+    <section id="result" class="panel">
+      <div class="section">
+        <div class="section-title">Answer</div>
+        <div id="answer" class="answer"></div>
+      </div>
+      <div class="section">
+        <div class="section-title">Trace</div>
+        <div id="trace" class="trace"></div>
+      </div>
+      <div class="section">
+        <div class="section-title">Retrieved Sources</div>
+        <div id="sources" class="sources"></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const $ = s => document.querySelector(s);
+    const q = $("#question"), btn = $("#askBtn"), status = $("#status");
+    const result = $("#result"), answer = $("#answer"), trace = $("#trace"), sources = $("#sources");
+
+    document.querySelectorAll("[data-q]").forEach(el => {
+      el.onclick = () => { q.value = el.dataset.q; q.focus(); };
+    });
+
+    q.addEventListener("keydown", e => {
+      if ((e.ctrlKey || e.metaKey) && e.key === "Enter") ask();
+    });
+
+    btn.onclick = ask;
+
+    function metric(label, value) {
+      const box = document.createElement("div");
+      box.className = "metric";
+      const l = document.createElement("div");
+      l.className = "metric-label";
+      l.textContent = label;
+      const v = document.createElement("div");
+      v.className = "metric-value";
+      v.textContent = value;
+      box.append(l, v);
+      return box;
+    }
+
+    function sourceCard(s) {
+      const d = document.createElement("details");
+      const sum = document.createElement("summary");
+      const top = document.createElement("div");
+      top.className = "source-top";
+      const name = document.createElement("div");
+      name.className = "source-name";
+      name.textContent = `[${s.source_id}] ${s.source}`;
+      const score = document.createElement("div");
+      score.className = "score";
+      score.textContent = Number(s.rerank_score).toFixed(6);
+      top.append(name, score);
+      const h = document.createElement("div");
+      h.className = "heading";
+      h.textContent = s.heading || "—";
+      sum.append(top, h);
+      const c = document.createElement("div");
+      c.className = "content";
+      c.textContent = s.content;
+      d.append(sum, c);
+      return d;
+    }
+
+    async function ask() {
+      const question = q.value.trim();
+      if (!question) return;
+
+      btn.disabled = true;
+      result.style.display = "none";
+      status.className = "status";
+      status.textContent = "Retrieving → Reranking → Generating…";
+
+      try {
+        const res = await fetch("/api/ask", {
+          method: "POST",
+          headers: {"Content-Type":"application/json"},
+          body: JSON.stringify({question})
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || "Request failed");
+
+        answer.textContent = data.answer;
+        trace.replaceChildren(
+          metric("Retrieval", `${Math.round(data.trace.retrieval_ms)} ms`),
+          metric("Generation", `${Math.round(data.trace.generation_ms)} ms`),
+          metric("Total", `${Math.round(data.trace.total_ms)} ms`),
+          metric("Tokens", data.trace.tokens ?? "—"),
+          metric("JSON Parse", data.trace.parse_success ? "PASS" : "FAIL")
+        );
+        sources.replaceChildren(...data.sources.map(sourceCard));
+        result.style.display = "block";
+        status.textContent = `Citations: ${data.citations.length ? data.citations.join(", ") : "none"}`;
+      } catch (e) {
+        status.className = "status error";
+        status.textContent = e.message;
+      } finally {
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>

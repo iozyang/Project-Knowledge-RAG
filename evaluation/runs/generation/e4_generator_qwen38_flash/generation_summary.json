@@ -1,0 +1,20 @@
+{
+  "experiment": "e4_generator_qwen38_flash",
+  "generator_model": "qwen3.8-flash",
+  "prompt": "G1.1_grounded",
+  "questions": 50,
+  "generated": 50,
+  "complete": true,
+  "current_run": {
+    "success": 50,
+    "failed": 0,
+    "wall_time_sec": 92.11374670000805,
+    "avg_wall_time_per_question_sec": 1.842274934000161,
+    "throughput_questions_per_min": 32.568428790224615
+  },
+  "tokens": {
+    "input": 56903,
+    "output": 6208,
+    "total": 63111
+  }
+}

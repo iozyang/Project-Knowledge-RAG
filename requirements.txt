@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+openai
+httpx
+python-dotenv
+numpy
+rank-bm25
+jieba
+langchain-text-splitters

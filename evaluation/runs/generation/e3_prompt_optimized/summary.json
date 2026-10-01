@@ -1,0 +1,66 @@
+{
+  "experiment": "e3_prompt_optimized",
+  "evaluator_version": "v2",
+  "generator_model": "deepseek-r1-distill-qwen-7b",
+  "questions": 50,
+  "deterministic": {
+    "questions": 50,
+    "answerable": 45,
+    "unanswerable": 5,
+    "parse_success": {
+      "count": 44,
+      "rate": 0.88
+    },
+    "abstention": {
+      "correct_unanswerable": 2,
+      "unanswerable_rate": 0.4,
+      "false_abstention": 4,
+      "false_abstention_rate": 0.08888888888888889
+    },
+    "citation_format": {
+      "valid_count": 47,
+      "valid_rate": 0.94,
+      "consistent_count": 12,
+      "consistent_rate": 0.24
+    },
+    "tokens": {
+      "total_input_tokens": 57153,
+      "total_output_tokens": 19241,
+      "total_tokens": 76394,
+      "avg_input_tokens": 1143.06,
+      "avg_output_tokens": 384.82,
+      "avg_total_tokens": 1527.88
+    },
+    "latency": {
+      "avg_ms": 4860.9576,
+      "median_ms": 4772.98,
+      "p95_ms": 7977.8115
+    }
+  },
+  "semantic": {
+    "answer_correctness": {
+      "avg_score": 0.525,
+      "correct": 12,
+      "partial": 24,
+      "wrong": 9
+    },
+    "faithfulness": {
+      "avg_score": 0.7634615384615384,
+      "avg_unsupported_claim_rate": 0.23653846153846153
+    },
+    "citation": {
+      "avg_accuracy": 1.0,
+      "avg_coverage": 0.07008547008547009
+    }
+  },
+  "performance": {
+    "wall_time_sec": 157.28023140000005,
+    "avg_time_per_question_sec": 3.145604628000001,
+    "throughput_questions_per_min": 19.074234398665816
+  },
+  "evaluation_tokens": {
+    "input_tokens": 101457,
+    "output_tokens": 25071,
+    "total_tokens": 126528
+  }
+}

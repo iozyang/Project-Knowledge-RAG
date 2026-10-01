@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "project_id": "dalian-neusoft-movie-analysis",
+  "project_name": "豆瓣电影大数据分析与可视化系统",
+  "prepared_at": "2026-09-27",
+  "scope": "10 selected Markdown documents; copied from sources with demo credential redactions in corpus copies only",
+  "chunking_scope": "Only files listed with include_in_chunking=true; metadata JSON is not corpus text.",
+  "provenance_note": "Team project. Documented functionality and personal contribution must be distinguished in answers.",
+  "documents": [
+    {
+      "document_id": "movie-data-01",
+      "path": "dalian-neusoft-movie-analysis/data/MovieAnalysis实施手册.md",
+      "source_path": "D:\\workspace\\pycharm\\MovieAnalysisData\\docs\\MovieAnalysis实施手册.md",
+      "content_type": "implementation",
+      "include_in_chunking": true,
+      "original_sha256": "70a1d3523b3a7ac841156b7251eb2ed0f432c13ba3711031248dae259c6846e5",
+      "corpus_sha256": "4a5daba0cabac980c4c6f74e4e467dfd88387895aae2563744a059ccc1a22acd",
+      "redaction_counts": {
+        "sqoop_inline_password": 1
+      }
+    },
+    {
+      "document_id": "movie-data-02",
+      "path": "dalian-neusoft-movie-analysis/data/Sqoop导出命令脚本.md",
+      "source_path": "D:\\workspace\\pycharm\\MovieAnalysisData\\docs\\Sqoop导出命令脚本.md",
+      "content_type": "data-transfer",
+      "include_in_chunking": true,
+      "original_sha256": "b9cee8e48821575bbb3ec011075843deb11d3bd90f18ace2dc955c5c593f12ec",
+      "corpus_sha256": "21e5c4f53c3b31fcecf89ffa0eacd10ca7ddce633da7c8084b35f0ca79445efa",
+      "redaction_counts": {
+        "database_password_pair": 1,
+        "sqoop_inline_password": 13,
+        "shell_password_variable": 1
+      }
+    },
+    {
+      "document_id": "movie-data-03",
+      "path": "dalian-neusoft-movie-analysis/data/数据分析结果结构说明.md",
+      "source_path": "D:\\workspace\\pycharm\\MovieAnalysisData\\docs\\数据分析结果结构说明.md",
+      "content_type": "data-contract",
+      "include_in_chunking": true,
+      "original_sha256": "edf660b8ecbe8041ce2943bccdafc09ff4892f83693e3bd8c01533ec84a010fc",
+      "corpus_sha256": "edf660b8ecbe8041ce2943bccdafc09ff4892f83693e3bd8c01533ec84a010fc",
+      "redaction_counts": {}
+    },
+    {
+      "document_id": "movie-backend-04",
+      "path": "dalian-neusoft-movie-analysis/backend/API手册.md",
+      "source_path": "D:\\workspace\\idea\\MovieAnalysisAPI\\docs\\API手册.md",
+      "content_type": "api",
+      "include_in_chunking": true,
+      "original_sha256": "a2b4f8d89d033bb0e39cbe9fd7761e926c333fda493e0043f2b7d24261c8fc02",
+      "corpus_sha256": "a2b4f8d89d033bb0e39cbe9fd7761e926c333fda493e0043f2b7d24261c8fc02",
+      "redaction_counts": {}
+    },
+    {
+      "document_id": "movie-backend-05",
+      "path": "dalian-neusoft-movie-analysis/backend/后端项目实施手册.md",
+      "source_path": "D:\\workspace\\idea\\MovieAnalysisAPI\\docs\\后端项目实施手册.md",
+      "content_type": "implementation",
+      "include_in_chunking": true,
+      "original_sha256": "195f21a65e585425082bb1b7af5d8837e868f768af33712d301492ce6fd6682d",
+      "corpus_sha256": "195f21a65e585425082bb1b7af5d8837e868f768af33712d301492ce6fd6682d",
+      "redaction_counts": {}
+    },
+    {
+      "document_id": "movie-backend-06",
+      "path": "dalian-neusoft-movie-analysis/backend/数据库检查与修复报告.md",
+      "source_path": "D:\\workspace\\idea\\MovieAnalysisAPI\\docs\\数据库检查与修复报告.md",
+      "content_type": "troubleshooting",
+      "include_in_chunking": true,
+      "original_sha256": "1b212ab943d798b9a7dd995aec49ea5d654770ba847c97dcd70daaaa8b1ef52a",
+      "corpus_sha256": "ba57f4fbc91b87915470316ac4a1492f0520adc47fe6b6c6d239027742732819",
+      "redaction_counts": {
+        "database_connection_password": 1
+      }
+    },
+    {
+      "document_id": "movie-backend-07",
+      "path": "dalian-neusoft-movie-analysis/backend/数据库设计文档.md",
+      "source_path": "D:\\workspace\\idea\\MovieAnalysisAPI\\docs\\数据库设计文档.md",
+      "content_type": "database-design",
+      "include_in_chunking": true,
+      "original_sha256": "1530155bb4a3a60378957862df9e47d56b371b6aed59eddad9ddba72b78b8b69",
+      "corpus_sha256": "1530155bb4a3a60378957862df9e47d56b371b6aed59eddad9ddba72b78b8b69",
+      "redaction_counts": {}
+    },
+    {
+      "document_id": "movie-backend-08",
+      "path": "dalian-neusoft-movie-analysis/backend/测试报告.md",
+      "source_path": "D:\\workspace\\idea\\MovieAnalysisAPI\\docs\\测试报告.md",
+      "content_type": "testing",
+      "include_in_chunking": true,
+      "original_sha256": "cd98532117ab1887193cae371a5bc693c7d152a3af5b91ade2f759290d0c8f8e",
+      "corpus_sha256": "cd98532117ab1887193cae371a5bc693c7d152a3af5b91ade2f759290d0c8f8e",
+      "redaction_counts": {}
+    },
+    {
+      "document_id": "movie-frontend-09",
+      "path": "dalian-neusoft-movie-analysis/frontend/前端实施方案.md",
+      "source_path": "D:\\workspace\\vscode\\MovieAnalysisWeb\\docs\\前端实施方案.md",
+      "content_type": "frontend-design",
+      "include_in_chunking": true,
+      "original_sha256": "769344bdadf574fbef10d988f1dcae960aff9abaf2199ee32b80162d0150a486",
+      "corpus_sha256": "275616c5b57397d397067677a8437211cba0877d53fe4203aac10279518c280c",
+      "redaction_counts": {
+        "demo_login_password": 1
+      }
+    },
+    {
+      "document_id": "movie-frontend-10",
+      "path": "dalian-neusoft-movie-analysis/frontend/用户使用手册.md",
+      "source_path": "D:\\workspace\\vscode\\MovieAnalysisWeb\\docs\\用户使用手册.md",
+      "content_type": "user-guide",
+      "include_in_chunking": true,
+      "original_sha256": "a712be5ac3569e29ab62d43d79470e46f0e03cfcd0b5061aeae656a72da6115e",
+      "corpus_sha256": "a2f64181f448ef6f4dca5689f7d019ba43cee9bbf375ca56ec67057966e762e0",
+      "redaction_counts": {
+        "demo_login_password": 4
+      }
+    }
+  ],
+  "excluded_duplicates": [
+    {
+      "source_path": "D:\\workspace\\vscode\\MovieAnalysisWeb\\docs\\后端API手册.md",
+      "same_as": "backend/API手册.md"
+    },
+    {
+      "source_path": "D:\\workspace\\pycharm\\MovieAnalysisData\\docs\\数据库检查与修复报告.md",
+      "same_as": "backend/数据库检查与修复报告.md"
+    }
+  ],
+  "deferred_sources": [
+    {
+      "path": "D:\\Desktop\\大连东软生产实习\\04-答辩与成果物交付\\答辩演示PPT\\9组-答辩演示.pdf",
+      "reason": "Optional overview and personal contribution context; manual extraction and fact check first."
+    },
+    {
+      "path": "D:\\Desktop\\大连东软生产实习\\04-答辩与成果物交付\\答辩演示PPT\\9组-答辩演示.pptx",
+      "reason": "Same presentation in editable format; do not ingest both."
+    },
+    {
+      "path": "D:\\workspace\\pycharm\\MovieAnalysisData\\data\\数据集结构说明.txt",
+      "reason": "Contains long raw CSV examples; distill useful schema explanation before Markdown chunking."
+    }
+  ],
+  "docx_conversion_needed_now": []
+}

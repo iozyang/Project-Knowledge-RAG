@@ -1,0 +1,11 @@
+{
+  "experiment": "E0",
+  "chunk_strategy": "fixed_size",
+  "chunk_size": 500,
+  "chunk_overlap": 100,
+  "retriever": "BM25",
+  "tokenizer": "jieba",
+  "top_k": 5,
+  "corpus_version": "P1-10MD-v1",
+  "benchmark_version": "v1"
+}

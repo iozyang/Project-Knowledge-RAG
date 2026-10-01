@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# Virtual environments
+.venv/
+venv/
+
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Runtime cache
+cache/*
+!cache/heading_corpus_chunks.jsonl
+!cache/heading_corpus_embeddings.npy
+
+# Local learning / archived experiments
+learning/

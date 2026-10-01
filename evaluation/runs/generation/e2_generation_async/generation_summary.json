@@ -1,0 +1,20 @@
+{
+  "experiment": "e2_generation_async",
+  "generator_model": "deepseek-r1-distill-qwen-7b",
+  "prompt": "G0_naive",
+  "questions": 50,
+  "generated": 50,
+  "complete": true,
+  "current_run": {
+    "success": 50,
+    "failed": 0,
+    "wall_time_sec": 88.47140159999981,
+    "avg_wall_time_per_question_sec": 1.7694280319999962,
+    "throughput_questions_per_min": 33.90926271931026
+  },
+  "tokens": {
+    "input": 45503,
+    "output": 22434,
+    "total": 67937
+  }
+}
