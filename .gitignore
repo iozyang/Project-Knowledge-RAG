@@ -23,6 +23,7 @@ Thumbs.db
 cache/*
 !cache/heading_corpus_chunks.jsonl
 !cache/heading_corpus_embeddings.npy
+!cache/heading_bm25_tokens.json
 
 # Local learning / archived experiments
 learning/

@@ -84,6 +84,11 @@ HEADING_EMBEDDINGS_PATH = (
     / "heading_corpus_embeddings.npy"
 )
 
+HEADING_BM25_TOKENS_PATH = (
+    CACHE_DIR
+    / "heading_bm25_tokens.json"
+)
+
 RUN_DIR = (
     PROJECT_ROOT
     / "evaluation"
@@ -230,14 +235,118 @@ def build_heading_bm25(
 
     否则标题只参与 Dense，
     实验变量就不一致了。
+
+    分词结果缓存到 cache/heading_bm25_tokens.json。
+    命中时直接读词表，再交给 BM25Okapi。
     """
 
-    tokenized_corpus = [
-        tokenize(
-            chunk["retrieval_text"]
+    CACHE_DIR.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+
+    tokenized_corpus = None
+
+
+    # --------------------------------------------------------
+    # Cache HIT
+    # --------------------------------------------------------
+
+    if (
+        HEADING_BM25_TOKENS_PATH.exists()
+        and HEADING_BM25_TOKENS_PATH.stat().st_size > 0
+    ):
+
+        try:
+
+            tokenized_corpus = json.loads(
+                HEADING_BM25_TOKENS_PATH.read_text(
+                    encoding="utf-8"
+                )
+            )
+
+
+            if (
+                isinstance(tokenized_corpus, list)
+                and len(tokenized_corpus) == len(chunks)
+                and all(
+                    isinstance(tokens, list)
+                    for tokens in tokenized_corpus
+                )
+            ):
+
+                print(
+                    "[CACHE HIT] "
+                    "heading bm25 tokens: "
+                    f"{len(tokenized_corpus)}"
+                )
+
+
+            else:
+
+                tokenized_corpus = None
+
+                print(
+                    "[CACHE INVALID] "
+                    "heading bm25 token 数量 "
+                    "和 chunk 数量不一致"
+                )
+
+
+        except (
+            json.JSONDecodeError,
+            OSError,
+            UnicodeError,
+        ):
+
+            tokenized_corpus = None
+
+            print(
+                "[CACHE INVALID] "
+                "heading bm25 tokens corrupted"
+            )
+
+
+    # --------------------------------------------------------
+    # Cache MISS
+    # --------------------------------------------------------
+
+    if tokenized_corpus is None:
+
+        print(
+            "[CACHE MISS] "
+            "heading bm25 tokens"
         )
-        for chunk in chunks
-    ]
+
+        print(
+            f"Tokenizing "
+            f"{len(chunks)} heading-aware chunks..."
+        )
+
+
+        tokenized_corpus = [
+            tokenize(
+                chunk["retrieval_text"]
+            )
+            for chunk in chunks
+        ]
+
+
+        HEADING_BM25_TOKENS_PATH.write_text(
+            json.dumps(
+                tokenized_corpus,
+                ensure_ascii=False,
+            ),
+            encoding="utf-8",
+        )
+
+
+        print(
+            "[CACHE SAVE] "
+            "heading bm25 tokens: "
+            f"{len(tokenized_corpus)}"
+        )
 
 
     return BM25Okapi(

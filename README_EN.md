@@ -6,7 +6,7 @@
 
 **[Live Demo](https://project-knowledge-rag.onrender.com)** · **[Swagger API](https://project-knowledge-rag.onrender.com/docs)** · **[Evaluation Docs](./evaluation/docs/)** · **[Benchmark](./benchmark/)**
 
-Current version **[v1.0.0](https://github.com/iozyang/Project-Knowledge-RAG/releases/tag/v1.0.0)**. Updates are listed in [Releases](https://github.com/iozyang/Project-Knowledge-RAG/releases).
+Current version **[v1.0.1](https://github.com/iozyang/Project-Knowledge-RAG/releases/tag/v1.0.1)**. Updates are listed in [Releases](https://github.com/iozyang/Project-Knowledge-RAG/releases).
 
 > The public demo runs on Render Free. After a period of inactivity, the first request may require a cold start.
 
@@ -260,7 +260,8 @@ Project-Knowledge-RAG/
 ├─ benchmark/                  # Fixed QA / evidence benchmark and audit reports
 ├─ cache/
 │  ├─ heading_corpus_chunks.jsonl
-│  └─ heading_corpus_embeddings.npy
+│  ├─ heading_corpus_embeddings.npy
+│  └─ heading_bm25_tokens.json
 ├─ corpus/                     # Frozen project-document corpus
 ├─ demo/
 │  ├─ api.py                   # FastAPI entry point
@@ -350,7 +351,7 @@ V1 deliberately keeps the online system small and inspectable:
 - single-turn question answering only;
 - no Query Rewrite / conversational contextualization yet;
 - one frozen software-project corpus;
-- chunks and corpus embeddings are currently file-based caches;
+- chunks, corpus embeddings, and BM25 tokens are currently file-based caches;
 - no PostgreSQL / pgvector persistence layer yet;
 - the free Render instance can cold-start after inactivity.
 

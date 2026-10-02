@@ -6,7 +6,7 @@
 
 **[在线 Demo](https://project-knowledge-rag.onrender.com)** · **[Swagger API](https://project-knowledge-rag.onrender.com/docs)** · **[实验文档](./evaluation/docs/)** · **[Benchmark](./benchmark/)**
 
-当前版本 **[v1.0.0](https://github.com/iozyang/Project-Knowledge-RAG/releases/tag/v1.0.0)**。更新记录见 [Releases](https://github.com/iozyang/Project-Knowledge-RAG/releases)。
+当前版本 **[v1.0.1](https://github.com/iozyang/Project-Knowledge-RAG/releases/tag/v1.0.1)**。更新记录见 [Releases](https://github.com/iozyang/Project-Knowledge-RAG/releases)。
 
 > 在线 Demo 部署于 Render Free。长时间无访问后首次请求可能需要等待冷启动。
 
@@ -269,7 +269,8 @@ Project-Knowledge-RAG/
 ├─ benchmark/                  # 固定 QA / Evidence Benchmark 与审计报告
 ├─ cache/
 │  ├─ heading_corpus_chunks.jsonl
-│  └─ heading_corpus_embeddings.npy
+│  ├─ heading_corpus_embeddings.npy
+│  └─ heading_bm25_tokens.json
 ├─ corpus/                     # 冻结项目文档语料
 ├─ demo/
 │  ├─ api.py                   # FastAPI 入口
@@ -359,7 +360,7 @@ V1 有意保持小而透明：
 - 仅支持单轮问答；
 - 尚未加入 Query Rewrite / Conversational Contextualization；
 - 当前只有一个冻结项目语料；
-- Chunk 与 Corpus Embedding 仍使用文件缓存；
+- Chunk、Corpus Embedding 与 BM25 分词结果仍使用文件缓存；
 - 尚未接入 PostgreSQL / pgvector；
 - Render Free 长时间无访问后存在冷启动。
 
