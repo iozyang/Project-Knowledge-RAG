@@ -6,6 +6,8 @@
 
 **[在线 Demo](https://project-knowledge-rag.onrender.com)** · **[Swagger API](https://project-knowledge-rag.onrender.com/docs)** · **[实验文档](./evaluation/docs/)** · **[Benchmark](./benchmark/)**
 
+当前版本 **[v1.0.0](https://github.com/iozyang/Project-Knowledge-RAG/releases/tag/v1.0.0)**。更新记录见 [Releases](https://github.com/iozyang/Project-Knowledge-RAG/releases)。
+
 > 在线 Demo 部署于 Render Free。长时间无访问后首次请求可能需要等待冷启动。
 
 ---

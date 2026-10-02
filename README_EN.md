@@ -6,6 +6,8 @@
 
 **[Live Demo](https://project-knowledge-rag.onrender.com)** · **[Swagger API](https://project-knowledge-rag.onrender.com/docs)** · **[Evaluation Docs](./evaluation/docs/)** · **[Benchmark](./benchmark/)**
 
+Current version **[v1.0.0](https://github.com/iozyang/Project-Knowledge-RAG/releases/tag/v1.0.0)**. Updates are listed in [Releases](https://github.com/iozyang/Project-Knowledge-RAG/releases).
+
 > The public demo runs on Render Free. After a period of inactivity, the first request may require a cold start.
 
 ---
